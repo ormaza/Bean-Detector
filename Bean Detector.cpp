@@ -15,7 +15,8 @@ int main(int argc, char** argv){
 
   threshold(image, image, 60, 255, CV_THRESH_BINARY);    
 
-  if(!image.data){
+  if(!image.data)
+  {
     std::cout << "imagem nao carregou corretamente\n";
     return(-1);
   }
@@ -33,11 +34,11 @@ int main(int argc, char** argv){
     {
       if(image.at<uchar>(i,j) == 0)
       {   	        
-    		p.x=j;
-    		p.y=i;
-    		floodFill(image,p,nobjects++);        
-	    }
-	  }
+	p.x=j;
+	p.y=i;
+	floodFill(image,p,nobjects++);        
+      }
+    }
   }
   
   // para cada cor ver quantos pixels tem desta cor e se for menor que 100 eh ruido
@@ -167,6 +168,7 @@ int main(int argc, char** argv){
 
   Mat resultado;
   resultado = imread(argv[1],1);
+  int tamanho;
  
   for(int i=0; i<height; i++)
   {
@@ -180,7 +182,7 @@ int main(int argc, char** argv){
       }
       else
       {
-        int tamanho = tamanhoDosFeijoes[image.at<uchar>(i,j)];
+        tamanho = tamanhoDosFeijoes[image.at<uchar>(i,j)];
         if(tamanho <= valorMin || tamanho >= valorMax)
         { 
           resultado.at<cv::Vec3b>(i, j)[2] = 255;
